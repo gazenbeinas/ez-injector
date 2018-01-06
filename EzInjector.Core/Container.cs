@@ -1,42 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EzInjector.Core.Extensions;
+using EzInjector.Core.Resolutions.Models;
+using EzInjector.Core.Resolutions.Services.Implementations;
 
 namespace EzInjector.Core
 {
     public class Container
     {
-        public T ResolveBy<T>()
-            where T : class =>
-            (T) ResolveBy(typeof(T));
+        public static Container Instance = new Container();
 
-        static object ResolveBy(Type resolvingType)
+        static readonly List<Resolution> Resolutions =
+            new List<Resolution>();
+
+        public void RegisterSingleton<T>()
+            where T : class
         {
-            var constructor = resolvingType
-                .LoadPublicConstructorOf();
-
-            var constructorParametersTypes =
-                constructor.GetConstructorParametersTypes();
-
-            if (constructorParametersTypes.Any())
+            Resolutions.Add(new SingletonResolution
             {
-                var parametersInstances =
-                    InitializeParameters(
-                        constructorParametersTypes);
-
-                return Activator.CreateInstance(
-                    resolvingType,
-                    parametersInstances.ToArray());
-            }
-
-            return Activator.CreateInstance(resolvingType);
+                ConcreteType = typeof(T)
+            });
         }
 
-        static List<object> InitializeParameters(
-            IEnumerable<Type> parametersTypes) =>
-            parametersTypes
-                .Select(ResolveBy)
-                .ToList();
+        public Resolution FindByConcreteType(Type type) =>
+            Resolutions.FirstOrDefault(r => r.ConcreteType == type);
+
+        public T Resolve<T>()
+            where T : class =>
+            (T)Resolve(typeof(T));
+
+        public object Resolve(Type resolvingType)
+        {
+            if (TypeIsNotMapped(resolvingType))
+                return TransientService.Instance.Create(resolvingType);
+
+            return FindByConcreteType(resolvingType)
+                .Initialize();
+        }
+
+        static bool TypeIsNotMapped(Type resolvingType) =>
+            Resolutions.All(x =>
+                x.ConcreteType != resolvingType);
     }
 }

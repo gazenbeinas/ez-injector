@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Concretes\ConcreteClassWithDependencies.cs" />
     <Compile Include="Concretes\MultiplePublicConstructors.cs" />
+    <Compile Include="Concretes\MutableConcreteWithDependenciesClass.cs" />
+    <Compile Include="Concretes\MutableConcreteClass.cs" />
     <Compile Include="Concretes\SimpleConcreteClassTwo.cs" />
     <Compile Include="Concretes\SimpleConcreteClassOne.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

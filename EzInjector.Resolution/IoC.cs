@@ -9,6 +9,10 @@ namespace EzInjector.Resolution
 
         public static T Get<T>()
             where T : class =>
-            Container.ResolveBy<T>();
+            Container.Resolve<T>();
+
+        public static void RegisterSingleton<T>()
+            where T : class =>
+            Container.RegisterSingleton<T>();
     }
 }
