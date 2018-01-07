@@ -14,5 +14,13 @@ namespace EzInjector.Resolution
         public static void RegisterSingleton<T>()
             where T : class =>
             Container.RegisterSingleton<T>();
+
+        public static void RegisterSingleton<TAbstract, TConcrete>()
+            where TConcrete : class, TAbstract =>
+            Container.RegisterSingleton<TAbstract, TConcrete>();
+
+        public static void RegisterTransient<TAbstract, TConcrete>()
+            where TConcrete : class, TAbstract =>
+            Container.RegisterTransient<TAbstract, TConcrete>();
     }
 }

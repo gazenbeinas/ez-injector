@@ -40,13 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concretes\ConcreteClassWithDependencies.cs" />
-    <Compile Include="Concretes\MultiplePublicConstructors.cs" />
-    <Compile Include="Concretes\MutableConcreteWithDependenciesClass.cs" />
-    <Compile Include="Concretes\MutableConcreteClass.cs" />
-    <Compile Include="Concretes\SimpleConcreteClassTwo.cs" />
-    <Compile Include="Concretes\SimpleConcreteClassOne.cs" />
+    <Compile Include="Concretes\Concrete\WithDependency\ConcreteClassWithDependencies.cs" />
+    <Compile Include="Concretes\Implementations\SimpleImplementationWithDependency.cs" />
+    <Compile Include="Concretes\Implementations\SimpleImplementation.cs" />
+    <Compile Include="Concretes\Concrete\WithoutDependency\MultiplePublicConstructors.cs" />
+    <Compile Include="Concretes\Mutables\MutableConcreteWithDependenciesClass.cs" />
+    <Compile Include="Concretes\Mutables\MutableConcreteClass.cs" />
+    <Compile Include="Concretes\Concrete\WithoutDependency\SimpleConcreteClassTwo.cs" />
+    <Compile Include="Concretes\Concrete\WithoutDependency\SimpleConcreteClassOne.cs" />
+    <Compile Include="Interfaces\ISimpleInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

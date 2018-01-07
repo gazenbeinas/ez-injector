@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using EzInjector.Core.Resolutions.Models;
+using EzInjector.Core.Resolutions.Models.Abstracts;
 using EzInjector.Core.Resolutions.Services.Implementations;
 
 namespace EzInjector.Core
@@ -13,6 +14,9 @@ namespace EzInjector.Core
         static readonly List<Resolution> Resolutions =
             new List<Resolution>();
 
+        public Container() =>
+            Resolutions?.Clear();
+
         public void RegisterSingleton<T>()
             where T : class
         {
@@ -22,8 +26,30 @@ namespace EzInjector.Core
             });
         }
 
+        public void RegisterSingleton<TAbstract, TConcrete>()
+            where TConcrete : class, TAbstract
+        {
+            Resolutions.Add(new SingletonResolution
+            {
+                AbstractType = typeof(TAbstract),
+                ConcreteType = typeof(TConcrete)
+            });
+        }
+
+        public void RegisterTransient<TAbstract, TConcrete>()
+            where TConcrete : class, TAbstract
+        {
+            Resolutions.Add(new TransientResolution
+            {
+                AbstractType = typeof(TAbstract),
+                ConcreteType = typeof(TConcrete)
+            });
+        }
+
         public Resolution FindByConcreteType(Type type) =>
-            Resolutions.FirstOrDefault(r => r.ConcreteType == type);
+            Resolutions.FirstOrDefault(r =>
+            r.ConcreteType == type ||
+            r.AbstractType == type);
 
         public T Resolve<T>()
             where T : class =>
@@ -40,6 +66,7 @@ namespace EzInjector.Core
 
         static bool TypeIsNotMapped(Type resolvingType) =>
             Resolutions.All(x =>
-                x.ConcreteType != resolvingType);
+                x.ConcreteType != resolvingType &&
+                x.AbstractType != resolvingType);
     }
 }

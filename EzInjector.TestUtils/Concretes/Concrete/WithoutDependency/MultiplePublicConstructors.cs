@@ -1,4 +1,4 @@
-﻿namespace EzInjector.TestUtils.Concretes
+﻿namespace EzInjector.TestUtils.Concretes.Concrete.WithoutDependency
 {
     public class MultiplePublicConstructors
     {

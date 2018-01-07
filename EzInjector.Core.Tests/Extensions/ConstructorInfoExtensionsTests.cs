@@ -1,6 +1,7 @@
 ﻿using System;
 using EzInjector.Core.Extensions;
-using EzInjector.TestUtils.Concretes;
+using EzInjector.TestUtils.Concretes.Concrete.WithDependency;
+using EzInjector.TestUtils.Concretes.Concrete.WithoutDependency;
 using Xunit;
 
 namespace EzInjector.Core.Tests.Extensions

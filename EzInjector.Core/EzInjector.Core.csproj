@@ -44,8 +44,10 @@
     <Compile Include="Exceptions\PublicConstructorException.cs" />
     <Compile Include="Extensions\ConstructorInfoExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="Resolutions\Models\Resolution.cs" />
+    <Compile Include="Resolutions\Models\Abstracts\Resolution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resolutions\Models\TransientResolution.cs" />
+    <Compile Include="Resolutions\Models\SingletonResolution.cs" />
     <Compile Include="Resolutions\Services\Implementations\SingletonService.cs" />
     <Compile Include="Resolutions\Services\Implementations\TransientService.cs" />
     <Compile Include="Resolutions\Services\Abstracts\LifeStyleService.cs" />

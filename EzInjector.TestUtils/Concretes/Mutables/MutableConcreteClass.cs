@@ -1,4 +1,4 @@
-﻿namespace EzInjector.TestUtils.Concretes
+﻿namespace EzInjector.TestUtils.Concretes.Mutables
 {
     public class MutableConcreteClass
     {
